@@ -1,4 +1,5 @@
 # This code serves as a simulation of to model the scenario on Problem 1-a
+import itertools
 import random
 
 class Deck(object):
@@ -54,7 +55,7 @@ def simulate_draw( line, deck):
     return deck.reveal_count + deck.bottom_to_top_count + deck.top_to_bottom_count
 
 
-for n in range(1,10000, 100):
+for n in range(8 * 10,8 * 10000, 80):
     card_order = ['r'] * n + ['b'] * n
     random.shuffle(card_order)
     
@@ -76,6 +77,12 @@ for n in range(1,10000, 100):
     res = simulate_draw(line, deck)
     print("Inverted order:", res/(2 * n))
   
+    # Divide in 8 ##
+    deck = Deck(n, list(card_order))
+    line = [['r'] * (n//8) + ['b'] * (n//8)] * 8
+    line = list(itertools.chain.from_iterable(line))
+    res = simulate_draw(line, deck)
+    print("8 chunks order:", res/(2 * n))
 
 
     print('\n')
