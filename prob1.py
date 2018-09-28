@@ -40,7 +40,7 @@ class Deck(object):
     def __repr__ (self):
         return str(self.cards)
 
-def simmulate_draw( line, deck):
+def simulate_draw( line, deck):
     assert(len(line) == len(deck.cards))
 
     i = 0
@@ -61,19 +61,19 @@ for n in range(1,10000, 100):
     # Same Order ##
     deck = Deck(n, list(card_order))
     line = list(card_order)
-    res = simmulate_draw(line, deck)
+    res = simulate_draw(line, deck)
     print("Same Order:", res/(2*n))
     
     # Reverse Order ##
     deck = Deck(n, list(card_order))
     line = card_order[::-1]
-    res = simmulate_draw(line, deck)
+    res = simulate_draw(line, deck)
     print("Reverse Order:", res/(2*n))
     
     # Inverted r <-> b ##
     deck = Deck(n, list(card_order))
     line = ['r' if e == 'b' else 'b' for e in card_order]
-    res = simmulate_draw(line, deck)
+    res = simulate_draw(line, deck)
     print("Inverted order:", res/(2 * n))
   
 
