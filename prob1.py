@@ -43,20 +43,22 @@ class Deck(object):
 def simmulate_draw( line, deck):
     assert(len(line) == len(deck.cards))
 
-    while len(line) > 0:
-        person = line.pop(0)
+    i = 0
+    while i < len(line):
+        person = line[i]
         
         t = deck.next_card(person)
         while ( not t ):
             t = deck.next_card(person)
+        i += 1
     return deck.reveal_count + deck.bottom_to_top_count + deck.top_to_bottom_count
 
 
 num = 4
 
-line = ['r'] * (num//2) + ['b'] * (num//2)
+line = ['r'] * (num) + ['b'] * (num)
 random.shuffle(line)
 
 deck = Deck(num, deck=line)
 res = simmulate_draw(line, deck)
-print("The number of operations was", res/num)
+print("The number of operations was", res)
