@@ -54,11 +54,28 @@ def simmulate_draw( line, deck):
     return deck.reveal_count + deck.bottom_to_top_count + deck.top_to_bottom_count
 
 
-num = 4
+for n in range(1,10000, 100):
+    card_order = ['r'] * n + ['b'] * n
+    random.shuffle(card_order)
+    
+    # Same Order ##
+    deck = Deck(n, list(card_order))
+    line = list(card_order)
+    res = simmulate_draw(line, deck)
+    print("Same Order:", res/(2*n))
+    
+    # Reverse Order ##
+    deck = Deck(n, list(card_order))
+    line = card_order[::-1]
+    res = simmulate_draw(line, deck)
+    print("Reverse Order:", res/(2*n))
+    
+    # Inverted r <-> b ##
+    deck = Deck(n, list(card_order))
+    line = ['r' if e == 'b' else 'b' for e in card_order]
+    res = simmulate_draw(line, deck)
+    print("Inverted order:", res/(2 * n))
+  
 
-line = ['r'] * (num) + ['b'] * (num)
-random.shuffle(line)
 
-deck = Deck(num, deck=line)
-res = simmulate_draw(line, deck)
-print("The number of operations was", res)
+    print('\n')
